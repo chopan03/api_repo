@@ -1,0 +1,8 @@
+
+source /Users/elchopan03/Desktop/Desk/api-rest-python-ai/env/bin/activate --> linea que inicia el entorno dentero de la temrinal
+
+deactivate --> termina el entorno
+
+virtualenv -p python "nombre del entorno sin comillas" --> crear un entorno nuevo en la temrinal (esto en Mac)
+
+.\env\Scripts\Activate.ps1 --> corro el entorno en Windows

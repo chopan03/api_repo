@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block title %} {{ data.titulo }} {% endblock  %}
+
+{% block body %}
+
+<h1>{{ data.saludo }}</h1> 
+{% if data.quantity_cursos > 0 %}
+    <ul>
+        {% for c in data.cursos %}
+        <li>{{ c }}</l>
+        {% endfor %} 
+   </ul>
+{% else %}
+<h2>No hay cursos disponibles</h2>
+{% endif %}
+
+{% endblock  %}
