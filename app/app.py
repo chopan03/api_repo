@@ -1,6 +1,25 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask_mysqldb import MySQL
 
 app=Flask(__name__)
+
+# Conexion MySQL
+#app.config['MYSQL_HOST'] = 'sd-3686659-h00001.ferozo.net'
+app.config['MYSQL_HOST'] = 'localhost'
+#app.config['MYSQL_USER'] = 'wi200391_pancho'
+
+app.config['MYSQL_USER'] = 'chopan'
+#app.config['MYSQL_PASSWORD'] = 'Pancho2023'
+app.config['MYSQL_PASSWORD'] = 'peperoni'
+
+#app.config['MYSQL_DB'] = 'wi200391_wp'
+
+app.config['MYSQL_DB'] = 'data'
+
+conexion = MySQL(app)
+
+
+
 
 @app.before_request # esto sirve para aplicar logica antes de una peticion
 def before_request():
@@ -35,6 +54,21 @@ def contacto(nombre):
 def query_string(): # vista
     print(request)
     return 'koko' 
+
+@app.route('/db')
+def listar_columnas():
+    data={}
+    try:
+        cursor=conexion.connection.cursor()
+        sql = "SELECT id, temp, hum, mov, fecha FROM db_ai"
+        cursor.execute(sql)
+        columnas=cursor.fetchall()
+        print(columnas)
+        data['mensaje']='Consulta Exitosa'
+    except Exception as ex:
+        print(ex)
+        data['mensaje']='Error...'
+    return jsonify(data)
 
 def error_404(error):
     # return render_template('404.html'), 404
